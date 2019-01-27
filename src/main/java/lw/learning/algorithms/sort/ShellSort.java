@@ -24,17 +24,18 @@ public class ShellSort {
 
         while (h > 0) {
 
-            for (int i = h; i < arr.length; i += h) {
+            for (int i = h; i < arr.length; i++) {
                 int tmp = arr[i];
                 int j = i;
-                for (; j > 0 && tmp < arr[j - h]; j -= h) {
+                for (; j >= h && tmp < arr[j - h]; j -= h) {
                     arr[j] = arr[j - h];
                 }
                 arr[j] = tmp;
             }
 
-            h = (h - 1) / 3;
+            h = h / 3;
         }
 
     }
+
 }
