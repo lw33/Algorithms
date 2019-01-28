@@ -6,9 +6,7 @@ import lw.learning.ds.Set;
 import lw.learning.ds.Stack;
 
 import java.lang.reflect.Constructor;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 
 /**
@@ -74,20 +72,29 @@ public class TestHelper {
     }
 
 
-    public static void testDSTime(DSType type, Class<?> clazz, List<String> book) {
-        testDSTime(type, clazz, 0, book);
+    public static void testDSTime(DSType type, Class<?> clazz, Object testData) {
+        testDSTime(type, clazz, 0, testData);
     }
 
-    public static void testDSTime(DSType type, Class<?> clazz,int initCapacity, List<String> book) {
+    /**
+     * 测试集合
+     * @param type
+     * @param clazz
+     * @param initCapacity
+     * @param book
+     */
+    public static void testDSTime(DSType type, Class<?> clazz,int initCapacity, Object testData) {
         try {
 
             switch (type) {
                 case MAP:
+                    testMapTime(clazz, initCapacity, (List<String>)testData);
                     break;
                 case SET:
-                    testSetTime(clazz,initCapacity, book);
+                    testSetTime(clazz,initCapacity, (List<String>)testData);
                     break;
                 case QUEUE:
+                    testQueueTime(clazz, initCapacity, (int[])testData);
                     break;
                 case STACkT:
                     break;
@@ -127,7 +134,70 @@ public class TestHelper {
         }
     }
 
+    public static void testMapTime(Class<?> clazz,int initCapacity, List<String> book) throws Exception {
+        Object o = null;
+        if (initCapacity != 0) {
+            Constructor<?> constructor = clazz.getConstructor(int.class);
+            o = constructor.newInstance(initCapacity);
+        } else {
+            o = clazz.newInstance();
+        }
 
+        if (o instanceof java.util.Map) {
+            java.util.Map<String, Integer> map = (java.util.Map<String, Integer>) o;
+            long duration = TimeHelper.process(() -> {
+                for (String s : book) {
+                    Integer times = map.get(s);
+                    map.put(s, times == null ? 1 : times + 1);
+                }
+            });
+
+            printInfo(clazz.getSimpleName(), duration, book.size(), map.size());
+        } else if (o instanceof Map) {
+            Map<String, Integer> map = (Map<String, Integer>) o;
+            long duration = TimeHelper.process(() -> {
+                for (String s : book) {
+                    Integer times = map.get(s);
+                    map.put(s, times == null ? 1 : times + 1);
+                }
+            });
+            printInfo(clazz.getSimpleName(), duration, book.size(), map.size());
+        }
+    }
+    public static void testQueueTime(Class<?> clazz,int initCapacity, int[] arr) throws Exception{
+        Object o = null;
+        if (initCapacity != 0) {
+            Constructor<?> constructor = clazz.getConstructor(int.class);
+            o = constructor.newInstance(initCapacity);
+        } else {
+            o = clazz.newInstance();
+        }
+        long duration = 0;
+        if (o instanceof Queue) {
+            Queue<Integer> queue = (Queue<Integer>) o;
+            duration = TimeHelper.process(() -> {
+                for (int i : arr) {
+                    queue.add(i);
+                }
+                for (int i = 0; i < arr.length; i++) {
+                    queue.poll();
+                }
+            });
+
+        } else if (o instanceof java.util.Queue) {
+
+            java.util.Queue<Integer> queue = (java.util.Queue<Integer>) o;
+            duration = TimeHelper.process(() -> {
+                for (int i : arr) {
+                    queue.add(i);
+                }
+                for (int i = 0; i < arr.length; i++) {
+                    queue.poll();
+                }
+            });
+        }
+        System.out.println(clazz.getSimpleName() + ": " + duration + " ms");
+    }
     public static void testSetTime(Set<String> set, List<String> book) {
         long duration = TimeHelper.process(() -> {
             for (String s : book) {

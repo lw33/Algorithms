@@ -7,5 +7,8 @@ package lw.learning.utils;
 @FunctionalInterface
 public interface Process {
 
+    /**
+     * Just do something...
+     */
     void process();
 }
