@@ -1,6 +1,5 @@
 package lw.learning.algorithms.sort;
 
-import lw.learning.ds.MinHeap;
 import lw.learning.utils.ArrayHelper;
 import lw.learning.utils.TestHelper;
 
