@@ -120,6 +120,9 @@ public class TestHelper {
                 for (String s : book) {
                     set.add(s);
                 }
+                for (String s : book) {
+                    set.contains(s);
+                }
             });
 
             printInfo(set.getClass().getSimpleName(), duration, book.size(), set.size());
@@ -128,6 +131,9 @@ public class TestHelper {
             long duration = TimeHelper.process(() -> {
                 for (String s : book) {
                     set.add(s);
+                }
+                for (String s : book) {
+                    set.contains(s);
                 }
             });
             printInfo(set.getClass().getSimpleName(), duration, book.size(), set.size());
