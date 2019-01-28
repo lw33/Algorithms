@@ -1,6 +1,10 @@
 package lw.learning.test.ds;
 
 import lw.learning.ds.Array;
+import lw.learning.ds.ArrayStack;
+import lw.learning.ds.LinkedListStack;
+import lw.learning.utils.ArrayHelper;
+import lw.learning.utils.TestHelper;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -10,7 +14,16 @@ import java.util.Arrays;
  * @Date 2019-01-26 22:30:17
  **/
 public class ArrayTest {
-    
+    @Test
+    public void benchmark() {
+        ArrayStack<Integer> arrayStack = new ArrayStack<>();
+        LinkedListStack<Integer> linkedListStack = new LinkedListStack<>();
+        int[] arr = ArrayHelper.getRandomSizFixedArray(10000000, 1000000);
+
+        TestHelper.testStackTime(arrayStack.getClass().getSimpleName(), arrayStack, arr);
+        TestHelper.testStackTime(linkedListStack.getClass().getSimpleName(), linkedListStack, arr);
+    }
+
     @Test
     public void test1() {
         Array<Integer> array = new Array<>();
@@ -32,4 +45,15 @@ public class ArrayTest {
         int[] ints = Arrays.copyOf(arr, 3);
         System.out.println(Arrays.toString(ints));
     }
+
+    @Test
+    public void test3() {
+        Array<Integer> array = new Array<>();
+        array.add(1);
+        array.add(0, 2);
+        System.out.println(array);
+    }
+
+
+
 }
