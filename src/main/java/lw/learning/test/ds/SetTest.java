@@ -1,8 +1,6 @@
 package lw.learning.test.ds;
 
-import lw.learning.ds.BSTSet;
-import lw.learning.ds.LinkedListSet;
-import lw.learning.ds.Trie;
+import lw.learning.ds.*;
 import lw.learning.utils.Book;
 import lw.learning.utils.DSType;
 import lw.learning.utils.TestHelper;
@@ -43,10 +41,14 @@ public class SetTest {
     @Test
     public void benchmark() {
         List<String> twoCities = Book.twoCities;
+
         TestHelper.testDSTime(DSType.SET, BSTSet.class, twoCities);
+        TestHelper.testDSTime(DSType.SET, AVLSet.class, twoCities);
         TestHelper.testDSTime(DSType.SET, Trie.class, twoCities);
+
         TestHelper.testDSTime(DSType.SET, TreeSet.class, twoCities);
         TestHelper.testDSTime(DSType.SET, HashSet.class, 6535, twoCities);
+
         TestHelper.testDSTime(DSType.SET, LinkedListSet.class, twoCities);
     }
 }

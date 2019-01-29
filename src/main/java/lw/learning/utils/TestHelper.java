@@ -158,6 +158,9 @@ public class TestHelper {
                     Integer times = map.get(s);
                     map.put(s, times == null ? 1 : times + 1);
                 }
+                for (String s : book) {
+                    map.containsKey(s);
+                }
             });
 
             printInfo(clazz.getSimpleName(), duration, book.size(), map.size());
@@ -167,6 +170,10 @@ public class TestHelper {
                 for (String s : book) {
                     Integer times = map.get(s);
                     map.put(s, times == null ? 1 : times + 1);
+                }
+                for (String s : book) {
+                    Integer times = map.get(s);
+                    map.contains(s);
                 }
             });
             printInfo(clazz.getSimpleName(), duration, book.size(), map.size());
