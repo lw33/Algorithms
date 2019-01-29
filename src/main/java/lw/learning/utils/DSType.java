@@ -1,5 +1,5 @@
 package lw.learning.utils;
 
 public enum DSType {
-    MAP, QUEUE, SET, STACkT
+    MAP, QUEUE, SET, STACkT, UF
 }

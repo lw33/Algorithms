@@ -1,12 +1,10 @@
 package lw.learning.utils;
 
-import lw.learning.ds.Map;
-import lw.learning.ds.Queue;
-import lw.learning.ds.Set;
-import lw.learning.ds.Stack;
+import lw.learning.ds.*;
 
 import java.lang.reflect.Constructor;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -78,25 +76,29 @@ public class TestHelper {
 
     /**
      * 测试集合
+     *
      * @param type
      * @param clazz
      * @param initCapacity
      * @param book
      */
-    public static void testDSTime(DSType type, Class<?> clazz,int initCapacity, Object testData) {
+    public static void testDSTime(DSType type, Class<?> clazz, int initCapacity, Object testData) {
         try {
 
             switch (type) {
                 case MAP:
-                    testMapTime(clazz, initCapacity, (List<String>)testData);
+                    testMapTime(clazz, initCapacity, (List<String>) testData);
                     break;
                 case SET:
-                    testSetTime(clazz,initCapacity, (List<String>)testData);
+                    testSetTime(clazz, initCapacity, (List<String>) testData);
                     break;
                 case QUEUE:
-                    testQueueTime(clazz, initCapacity, (int[])testData);
+                    testQueueTime(clazz, initCapacity, (int[]) testData);
                     break;
                 case STACkT:
+                    break;
+                case UF:
+                    testUFTime(clazz, initCapacity, (int[]) testData);
                     break;
             }
 
@@ -105,7 +107,7 @@ public class TestHelper {
         }
     }
 
-    public static void testSetTime(Class<?> clazz,int initCapacity, List<String> book) throws Exception {
+    public static void testSetTime(Class<?> clazz, int initCapacity, List<String> book) throws Exception {
         Object o = null;
         if (initCapacity != 0) {
             Constructor<?> constructor = clazz.getConstructor(int.class);
@@ -140,7 +142,7 @@ public class TestHelper {
         }
     }
 
-    public static void testMapTime(Class<?> clazz,int initCapacity, List<String> book) throws Exception {
+    public static void testMapTime(Class<?> clazz, int initCapacity, List<String> book) throws Exception {
         Object o = null;
         if (initCapacity != 0) {
             Constructor<?> constructor = clazz.getConstructor(int.class);
@@ -170,7 +172,8 @@ public class TestHelper {
             printInfo(clazz.getSimpleName(), duration, book.size(), map.size());
         }
     }
-    public static void testQueueTime(Class<?> clazz,int initCapacity, int[] arr) throws Exception{
+
+    public static void testQueueTime(Class<?> clazz, int initCapacity, int[] arr) throws Exception {
         Object o = null;
         if (initCapacity != 0) {
             Constructor<?> constructor = clazz.getConstructor(int.class);
@@ -204,6 +207,7 @@ public class TestHelper {
         }
         System.out.println(clazz.getSimpleName() + ": " + duration + " ms");
     }
+
     public static void testSetTime(Set<String> set, List<String> book) {
         long duration = TimeHelper.process(() -> {
             for (String s : book) {
@@ -222,6 +226,27 @@ public class TestHelper {
             }
         });
         printInfo(map.getClass().getSimpleName(), duration, book.size(), map.size());
+    }
+
+    /**
+     * @param ufClass
+     * @param test    4 * testTimes 大小  2 * testTimes union 2 * testTimes isConnected
+     * @throws NoSuchMethodException
+     */
+    public static void testUFTime(Class<?> ufClass, int initCapacity, int[] test) throws Exception {
+
+        Constructor<UF> constructor = (Constructor<UF>) ufClass.getConstructor(int.class);
+        UF uf = constructor.newInstance(initCapacity);
+        long duration = TimeHelper.process(() -> {
+            int i = 0;
+            for (; i < test.length / 2; i += 2) {
+                uf.union(test[i], test[i + 1]);
+            }
+            for (; i < test.length; i += 2) {
+                uf.isConnected(test[i], test[i + 1]);
+            }
+        });
+        System.out.println(ufClass.getSimpleName() + ": " + duration + " ms");
     }
 
     private static void printInfo(String name, long duration, int totalWords, int uniqueWords) {
