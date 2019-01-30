@@ -44,6 +44,7 @@ public class SetTest {
 
         TestHelper.testDSTime(DSType.SET, BSTSet.class, twoCities);
         TestHelper.testDSTime(DSType.SET, AVLSet.class, twoCities);
+        TestHelper.testDSTime(DSType.SET, RBTreeSet.class, twoCities);
         TestHelper.testDSTime(DSType.SET, Trie.class, twoCities);
 
         TestHelper.testDSTime(DSType.SET, TreeSet.class, twoCities);

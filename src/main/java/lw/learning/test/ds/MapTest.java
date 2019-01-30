@@ -1,8 +1,6 @@
 package lw.learning.test.ds;
 
-import lw.learning.ds.AVLMap;
-import lw.learning.ds.BSTMap;
-import lw.learning.ds.LinkedListMap;
+import lw.learning.ds.*;
 import lw.learning.utils.ArrayHelper;
 import lw.learning.utils.Book;
 import lw.learning.utils.DSType;
@@ -37,6 +35,7 @@ public class MapTest {
         TestHelper.testDSTime(DSType.MAP, HashMap.class, twoCities);
 
         TestHelper.testDSTime(DSType.MAP, AVLMap.class, twoCities);
+        TestHelper.testDSTime(DSType.MAP, RBTreeMap.class, twoCities);
         TestHelper.testDSTime(DSType.MAP, BSTMap.class, twoCities);
 
         TestHelper.testDSTime(DSType.MAP, LinkedListMap.class, twoCities);
