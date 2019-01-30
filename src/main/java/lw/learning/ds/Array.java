@@ -8,6 +8,7 @@ import java.util.Arrays;
  **/
 public class Array<E> {
 
+
     private Object[] data;
     private int size;
 

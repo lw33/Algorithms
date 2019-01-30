@@ -1,6 +1,9 @@
 package lw.learning.test.ds;
 
-import lw.learning.ds.*;
+import lw.learning.ds.UnionFind3;
+import lw.learning.ds.UnionFind4;
+import lw.learning.ds.UnionFind5;
+import lw.learning.ds.UnionFind6;
 import lw.learning.utils.ArrayHelper;
 import lw.learning.utils.DSType;
 import lw.learning.utils.TestHelper;

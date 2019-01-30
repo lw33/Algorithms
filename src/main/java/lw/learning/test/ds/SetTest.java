@@ -6,7 +6,6 @@ import lw.learning.utils.DSType;
 import lw.learning.utils.TestHelper;
 import org.junit.Test;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -15,7 +14,7 @@ import java.util.TreeSet;
  * @Date 2019-01-27 17:14:51
  **/
 public class SetTest {
-    
+
     @Test
     public void test() {
         List<String> twoCities = Book.twoCities;
@@ -46,10 +45,12 @@ public class SetTest {
         TestHelper.testDSTime(DSType.SET, AVLSet.class, twoCities);
         TestHelper.testDSTime(DSType.SET, RBTreeSet.class, twoCities);
         TestHelper.testDSTime(DSType.SET, Trie.class, twoCities);
+        TestHelper.testDSTime(DSType.SET, lw.learning.ds.HashSet.class,9944, twoCities);
 
+        System.out.println("jdk: ");
         TestHelper.testDSTime(DSType.SET, TreeSet.class, twoCities);
-        TestHelper.testDSTime(DSType.SET, HashSet.class, 6535, twoCities);
+        TestHelper.testDSTime(DSType.SET, java.util.HashSet.class, 6535, twoCities);
 
-        TestHelper.testDSTime(DSType.SET, LinkedListSet.class, twoCities);
+        //TestHelper.testDSTime(DSType.SET, LinkedListSet.class, twoCities);
     }
 }

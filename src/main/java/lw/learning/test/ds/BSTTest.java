@@ -1,11 +1,8 @@
 package lw.learning.test.ds;
 
-import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 import lw.learning.ds.BST;
 import lw.learning.utils.ArrayHelper;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 /**
  * @Author lw
