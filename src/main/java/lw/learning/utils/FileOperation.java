@@ -1,5 +1,7 @@
 package lw.learning.utils;
 
+import lw.learning.ds.Graph;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -83,4 +85,31 @@ public class FileOperation {
         return scanner;
     }
 
+    public static Graph readGrap(Class< ? extends Graph> graph, boolean directed, String filename)  {
+
+
+        // 文件读取
+        Scanner scanner = getScanner(filename);
+        if (scanner == null)
+            return null;
+
+        String mateData = scanner.nextLine();
+        String[] strs = mateData.split(" ");
+        int n = Integer.parseInt(strs[0]);
+        Graph g = null;
+        try {
+            g = graph.getDeclaredConstructor(int.class, boolean.class).newInstance(n, directed);
+            while (scanner.hasNextLine()) {
+                String edge = scanner.nextLine();
+                String[] s = edge.split(" ");
+                int v = Integer.parseInt(s[0]);
+                int w = Integer.parseInt(s[1]);
+                g.addEdge(v, w);
+            }
+            return g;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
