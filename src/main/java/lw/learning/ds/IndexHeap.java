@@ -22,12 +22,16 @@ public class IndexHeap<E> {
         data = new Object[capacity];
         indexes = new int[capacity];
         reverse = new int[capacity];
+        for (int i = 0; i < capacity; i++) {
+            indexes[i] = -1;
+            reverse[i] = -1;
+        }
     }
 
     public void add(int i, E e) {
-        if (i < 0 || i > size) {
+       /* if (i < 0 || i > size) {
             return;
-        }
+        }*/
 
         data[i] = e;
         indexes[size] = i;
@@ -146,6 +150,9 @@ public class IndexHeap<E> {
         return i * 2 + 2;
     }
 
+    public boolean contains(int i) {
+        return reverse[i] != -1;
+    }
     public static void main(String[] args) {
 
         IndexHeap<Integer> integerIndexHeap1 = new IndexHeap<>(10, Integer::compare);
@@ -161,4 +168,6 @@ public class IndexHeap<E> {
         System.out.println(Arrays.toString(integerIndexHeap1.reverse));
         System.out.println(integerIndexHeap1.size);
     }
+
+
 }

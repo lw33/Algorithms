@@ -1,6 +1,7 @@
 package lw.learning.utils;
 
 import lw.learning.ds.Graph;
+import lw.learning.ds.wg.WeightGraph;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -105,6 +106,30 @@ public class FileOperation {
                 int v = Integer.parseInt(s[0]);
                 int w = Integer.parseInt(s[1]);
                 g.addEdge(v, w);
+            }
+            return g;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static WeightGraph readWeightGrap(Class< ? extends WeightGraph> graph, boolean directed, String filename)  {
+        Scanner scanner = getScanner(filename);
+        if (scanner == null) return null;
+        String matedata = scanner.nextLine();
+        String[] strs = matedata.split(" ");
+        int n = Integer.parseInt(strs[0]);
+        WeightGraph g = null;
+        try {
+            g = graph.getDeclaredConstructor(int.class, boolean.class).newInstance(n, directed);
+            while (scanner.hasNextLine()) {
+                String edge = scanner.nextLine();
+                String[] s = edge.split(" ");
+                int v = Integer.parseInt(s[0]);
+                int w = Integer.parseInt(s[1]);
+                double weight = Double.parseDouble(s[2]);
+                g.addEdge(v, w, weight);
             }
             return g;
         } catch (Exception e) {

@@ -2,9 +2,13 @@ package lw.learning.test.ds;
 
 import lw.learning.algorithms.graph.Component;
 import lw.learning.algorithms.graph.Path;
+import lw.learning.algorithms.graph.ShortestPath;
 import lw.learning.ds.DenseGraph;
 import lw.learning.ds.Graph;
 import lw.learning.ds.SparseGraph;
+import lw.learning.ds.wg.WeightDenseGraph;
+import lw.learning.ds.wg.WeightGraph;
+import lw.learning.ds.wg.WeightSparseGraph;
 import lw.learning.utils.FileOperation;
 import org.junit.Test;
 
@@ -47,5 +51,18 @@ public class GraphTest {
         Path path = new Path(graph2, 0);
         path.showPath(6);
 
+        ShortestPath shortestPath = new ShortestPath(graph2, 0);
+        shortestPath.showPath(6);
     }
+
+    @Test
+    public void test4() {
+        WeightGraph weightGraph1 = FileOperation.readWeightGrap(WeightSparseGraph.class, false, "wg2.txt");
+        WeightGraph weightGraph2 = FileOperation.readWeightGrap(WeightDenseGraph.class, false, "wg2.txt");
+        WeightGraph.printGraph(weightGraph1);
+        WeightGraph.printGraph(weightGraph2);
+
+    }
+
+
 }
