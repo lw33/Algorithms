@@ -100,12 +100,14 @@ public class BellmanFord<T extends Comparable<T>> {
         WeightGraph<Double> weightGraph = FileOperation.readWeightGrap(WeightSparseGraph.class, true, "tg1.txt");
 
         Comparator<Double> comparator = (d1, d2) -> -d1.compareTo(d2);
-        BellmanFord<Double> dijkstra = new BellmanFord<>(weightGraph, comparator, (a, b) -> a + b, 0, 0.0);
+        BellmanFord<Double> bellmanFord = new BellmanFord<>(weightGraph, comparator, (a, b) -> a + b, 0, 0.0);
+
         for (int i = 1; i < weightGraph.V(); i++) {
             System.out.println("Shortest Path to " + i);
-            dijkstra.showPath(i);
+            bellmanFord.showPath(i);
             System.out.println("==========================================");
         }
+
         System.out.println();
     }
 }
