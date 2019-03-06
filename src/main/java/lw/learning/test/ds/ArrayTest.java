@@ -5,6 +5,7 @@ import lw.learning.ds.ArrayStack;
 import lw.learning.ds.LinkedListStack;
 import lw.learning.utils.ArrayHelper;
 import lw.learning.utils.TestHelper;
+import lw.learning.utils.TimeHelper;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -55,5 +56,30 @@ public class ArrayTest {
     }
 
 
+    @Test
+    public void test4() {
+
+        int n = 1000000000;
+
+
+
+        long duration2 = TimeHelper.process(() -> {
+            int value = 0;
+            for (int i = 0; i < n; i++) {
+                value = i;
+            }
+            System.out.println(value);
+        });
+
+        long duration1 = TimeHelper.process(() -> {
+            Integer value = 0;
+            for (int i = 0; i < n; i++) {
+                value = i;
+            }
+            System.out.println(value);
+        });
+        System.out.println(duration1);
+        System.out.println(duration2);
+    }
 
 }

@@ -18,10 +18,11 @@ public class BSTTest {
         for (int i : arr) {
             bst.add(i);
         }
-        bst.inOrder();
-        for (int i : arr) {
+        bst.preOrderNR();
+       /* for (int i : arr) {
             bst.remove(i);
         }
-        bst.inOrder();
+        bst.inOrder();*/
+        bst.postOrderNR();
     }
 }
